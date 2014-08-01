@@ -9,9 +9,9 @@ public class SensorDAOFactory {
 	public static final int SENSOR_METADATA = 3;
 	
 	
-	public static SensorDAO getSensorDAO(int type) { 
+	public static SensorDataDAO getSensorDAO(int type) { 
         if (type == SENSOR_TIMESERIES) {
-            return new CassandraSensorDAO();
+            return new CassandraSensorDataDAO();
         } 
         else if (type == SENSOR_METADATA){
         	//return new JenaTdbDAO();
