@@ -1,17 +1,18 @@
-package com.accenture.techlabs.sensordata.dao;
+package com.accenture.techlabs.sensordata.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SensorDataType {
+public class DeviceDataType {
 	public enum Type {DOUBLE, INT, TEXT};
 	
 	Map<String, List<String>> members; //name of data types of each sensors, key is sensor_name
 	Map<String, List<Type>> types;
 	
-	public SensorDataType(){
+
+	public DeviceDataType(){
 		members = new HashMap<String, List<String>>();
 		types = new HashMap<String, List<Type>>();
 	}

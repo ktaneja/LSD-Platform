@@ -2,12 +2,8 @@ package com.accenture.techlabs.sensordata.dbconnectors;
 
 
 import com.datastax.driver.core.Cluster;
-import com.datastax.driver.core.Host;
-import com.datastax.driver.core.Metadata;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Session;
-
-import static java.lang.System.out;
 
 /**
  * Class used for connecting to Cassandra database.
@@ -26,6 +22,7 @@ public class CassandraConnector
    
    private CassandraConnector(){
 	   String serverIP = "10.1.185.134"; // get from property file
+	   serverIP = "localhost";
 	   String keyspace = "sensor_data";
 	   connect(serverIP, keyspace);
    }

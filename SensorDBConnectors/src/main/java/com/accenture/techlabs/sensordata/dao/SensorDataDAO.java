@@ -2,11 +2,11 @@ package com.accenture.techlabs.sensordata.dao;
 
 import java.util.Calendar;
 
-import com.accenture.techlabs.sensordata.model.SensorDataType;
-import com.accenture.techlabs.sensordata.model.SensorObservationData;
+import com.accenture.techlabs.sensordata.model.DeviceObservationData;
+import com.accenture.techlabs.sensordata.model.DeviceDataType;
 
 public interface SensorDataDAO {
-	public boolean createTable(String deviceID, SensorDataType datatype);
-	public boolean addData(String deviceID, SensorObservationData data);
-	public SensorObservationData getData(String deviceID, Calendar from, Calendar to);
+	public boolean createTable(String deviceID, DeviceDataType datatype);
+	public boolean addData(String deviceID, DeviceObservationData data);
+	public DeviceObservationData getData(String deviceID, Calendar from, Calendar to);
 }
