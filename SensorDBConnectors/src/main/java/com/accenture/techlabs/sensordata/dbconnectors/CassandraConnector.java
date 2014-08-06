@@ -22,7 +22,7 @@ public class CassandraConnector
    
    private CassandraConnector(){
 	   String serverIP = "10.1.185.134"; // get from property file
-	   serverIP = "localhost";
+	   //serverIP = "localhost";
 	   String keyspace = "sensor_data";
 	   connect(serverIP, keyspace);
    }
