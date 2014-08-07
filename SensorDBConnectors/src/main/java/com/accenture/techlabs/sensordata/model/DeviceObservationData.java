@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.joda.time.DateTime;
 
+import com.accenture.techlabs.sensordata.dao.CassandraSensorDataDAO;
 import com.accenture.techlabs.sensordata.model.DeviceDataType.Type;
 import com.google.gson.Gson;
 
@@ -67,19 +68,30 @@ public class DeviceObservationData {
 		Gson gson = new Gson();
 		DateTime time = DateTime.now();
 		
-		DeviceObservationData data = new DeviceObservationData("VM", "123");
-		SensorObservationData sData = data.new SensorObservationData("memory_sensor");
+		DeviceObservationData data = new DeviceObservationData("vm_qiandemo_gui", "123");
+		SensorObservationData sData = data.new SensorObservationData("vcenter_1");
 		DeviceDataType type = new DeviceDataType();
-		type.addMember("memory_sensor", "", Type.DOUBLE);
+		type.addMember("vcenter_1", "cpureading", Type.DOUBLE);
+		type.addMember("vcenter_1", "diskreading", Type.INT);
+		type.addMember("vcenter_1", "memoryreading", Type.DOUBLE);
 		data.setDataType(type);
 		List<Object> obs = new ArrayList<Object>();
 		obs.add(55);
+		obs.add(1);
+		obs.add(99);
 		sData.addSensorEntry(time, obs);
-		data.addObservationValue("memory_sensor", sData);;
+		
+		time = DateTime.now();
+		sData.addSensorEntry(time, obs);
+		
+		data.addObservationValue("vcenter_1", sData);
 		String json = gson.toJson(data);
 		System.out.println(json);
 		DeviceObservationData xData  = gson.fromJson(json, DeviceObservationData.class);
-		System.out.println(xData.getObservationValues().get("memory_sensor"));
+		List<String> queries = CassandraSensorDataDAO.synthesizeCreateTableQueries(xData);
+		for (String query : queries) {
+			System.out.println(query);
+		}
 	}
 	
 	public class Pair<K, V>{

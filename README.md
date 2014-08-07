@@ -1,4 +1,4 @@
 LSD-Platform
 ============
 
-Linked Sensor Data Platform
+Linked Sensor Data Platform.

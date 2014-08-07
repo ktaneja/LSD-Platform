@@ -7,6 +7,6 @@ import com.accenture.techlabs.sensordata.model.DeviceDataType;
 
 public interface SensorDataDAO {
 	public boolean createTable(String deviceID, DeviceDataType datatype);
-	public boolean addData(String deviceID, DeviceObservationData data);
-	public DeviceObservationData getData(String deviceID, Calendar from, Calendar to);
+	public boolean addData(DeviceObservationData data);
+	public String getData(String deviceID, String from, String to);
 }
