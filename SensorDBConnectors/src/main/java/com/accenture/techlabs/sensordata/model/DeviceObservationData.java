@@ -88,7 +88,7 @@ public class DeviceObservationData {
 		String json = gson.toJson(data);
 		System.out.println(json);
 		DeviceObservationData xData  = gson.fromJson(json, DeviceObservationData.class);
-		List<String> queries = CassandraSensorDataDAO.synthesizeCreateTableQueries(xData);
+		List<String> queries = CassandraSensorDataDAO.synthesizeInsertIntoQueries(xData);
 		for (String query : queries) {
 			System.out.println(query);
 		}
@@ -131,6 +131,10 @@ public class DeviceObservationData {
 		
 		public void addSensorEntry(DateTime time, List<Object> observations){
 			sensorData.add(new Pair<Long, List<Object>>(time.getMillis(), observations));
+		}
+		
+		public void addSensorEntry(long time, List<Object> observations){
+			sensorData.add(new Pair<Long, List<Object>>(time, observations));
 		}
 		
 		public String getSensorName() {

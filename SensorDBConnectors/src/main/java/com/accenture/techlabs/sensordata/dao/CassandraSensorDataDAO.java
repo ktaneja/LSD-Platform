@@ -63,7 +63,7 @@ public class CassandraSensorDataDAO implements SensorDataDAO {
 		return queryString;
 	}
 
-	public static List<String> synthesizeCreateTableQueries(DeviceObservationData observationData) {
+	public static List<String> synthesizeInsertIntoQueries(DeviceObservationData observationData) {
 		List<String> queries = new ArrayList<String>();
 		String devicename = observationData.getDeviceName();
 		String uuid = observationData.getSensorUUID();
@@ -91,13 +91,13 @@ public class CassandraSensorDataDAO implements SensorDataDAO {
 		
 		for (String sensor : dTypes.keySet()) {
 			
-			SensorObservationData sensorObservationData = data.get(sensor);
+			SensorObservationData sensorObservationData = data.get(sensor.toLowerCase());
 			List<Pair<Long, List<Object>>> sensordata = sensorObservationData.getSensorData();
 			for (Pair<Long, List<Object>> pair : sensordata) {
 				StringBuilder query = new StringBuilder(queryPrefix);
 				
 				List<Object> observations = pair.getValue();
-				query.append("'" + devicename + "', " + pair.getKey()); 
+				query.append("'" + sensor + "', " + pair.getKey()); 
 				
 				for (Object object : observations) {
 					if(dTypes.get(sensor).get(observations.indexOf(object)) == Type.TEXT)
@@ -121,7 +121,7 @@ public class CassandraSensorDataDAO implements SensorDataDAO {
 	}
 	
 	public boolean addData(DeviceObservationData data) {
-		List<String> queries = synthesizeCreateTableQueries(data);
+		List<String> queries = synthesizeInsertIntoQueries(data);
 		for (String query : queries) {
 			if(connection == null)
 				connection = CassandraConnector.getConnection();

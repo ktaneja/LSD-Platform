@@ -38,5 +38,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/VSpheredata/WebContent/WEB-INF/lib/vijava55b20130927.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
